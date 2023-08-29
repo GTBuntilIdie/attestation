@@ -1,4 +1,7 @@
-package com.gridnine.testing;
+package com.gridnine.testing.model;
+
+import com.gridnine.testing.model.Flight;
+import com.gridnine.testing.model.Segment;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -6,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class FlightBuilder {
-    static List<Flight> createFlights() {
+    public static List<Flight> createFlights() {
         LocalDateTime threeDaysFromNow = LocalDateTime.now().plusDays(3);
         return Arrays.asList(
                 //A normal flight with two hour duration
@@ -37,6 +40,14 @@ public class FlightBuilder {
             segments.add(new Segment(dates[i], dates[i + 1]));
         }
         return new Flight(segments);
+    }
+
+    public static Flight createFlightFromSegments(final Segment... segments) {
+        List<Segment> flightList = new ArrayList<>(segments.length);
+        for (int i = 0; i < (segments.length - 1); i ++) {
+            flightList.add(segments[i]);
+        }
+        return new Flight(flightList);
     }
 }
 
